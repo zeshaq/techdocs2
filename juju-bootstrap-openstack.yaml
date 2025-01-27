@@ -1,0 +1,44 @@
+need to install simplestreams and enable image metadata update to object storage.
+
+
+
+source openrc
+juju add-cloud
+juju autoload-credentials
+
+
+ 
+
+openstack flavor create --vcpus 12 --ram 9048 --disk 20  juju-controller
+
+juju bootstrap --debug \
+    --config network=int_net \
+    --config external-network=ext_net \
+    --bootstrap-constraints 'instance-type=juju-controller allocate-public-ip=True ' \
+    os1 os1-controller
+
+
+ 
+
+cp /home/ze/snap/openstackclients/common/root-ca.crt /home/ze/root-ca1.crt
+
+
+    https://discourse.charmhub.io/t/bootstrap-juju-controller-to-openstack-base-connected-openstack-cloud-fails-with-address-not-found-error/3154/25
+
+
+https://discourse.charmhub.io/t/juju-controller-bootstrap-fails-on-openstack-backed-private-cloud/15945
+
+    juju bootstrap openstack-cloud --bootstrap-series=bionic --config network="Private Network IPv4" --config external-network="Floating Network IPv4" --config use-floating-ip=true --metadata-source ~/simplestreams/images --debug
+
+
+https://bugs.launchpad.net/juju/+bug/2088224
+juju metadata generate-image -d ~/simplestreams -i 78d00453-a9a7-4138-b6b2-47817cfb05c3 --base ubuntu@22.04 -r RegionOne -u https://10.120.123.24:5000/v3/
+
+
+
+juju deploy  glance-simplestreams-sync --channel latest/edge
+juju config --file gss.yaml glance-simplestreams-sync
+juju config glance-simplestreams-sync use_swift=true
+juju config glance-simplestreams-sync frequency=weekly run=true 
+juju integrate glance-simplestreams-sync keystone
+juju integrate glance-simplestreams-sync vault

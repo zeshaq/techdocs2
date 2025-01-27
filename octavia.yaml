@@ -1,0 +1,79 @@
+mkdir -p demoCA/newcerts
+touch demoCA/index.txt
+touch demoCA/index.txt.attr
+
+openssl genpkey -algorithm RSA -aes256 -pass pass:foobar -out issuing_ca_key.pem
+openssl req -x509 -passin pass:foobar -new -nodes -key issuing_ca_key.pem \
+    -config /etc/ssl/openssl.cnf \
+    -subj "/C=US/ST=Somestate/O=Org/CN=www.example.com" \
+    -days 365 \
+    -out issuing_ca.pem
+
+openssl genpkey -algorithm RSA -aes256 -pass pass:foobar -out controller_ca_key.pem
+openssl req -x509 -passin pass:foobar -new -nodes \
+        -key controller_ca_key.pem \
+    -config /etc/ssl/openssl.cnf \
+    -subj "/C=US/ST=Somestate/O=Org/CN=www.example.com" \
+    -days 365 \
+    -out controller_ca.pem
+openssl req \
+    -newkey rsa:2048 -nodes -keyout controller_key.pem \
+    -subj "/C=US/ST=Somestate/O=Org/CN=www.example.com" \
+    -out controller.csr
+openssl ca -passin pass:foobar -config /etc/ssl/openssl.cnf \
+    -cert controller_ca.pem -keyfile controller_ca_key.pem \
+    -create_serial -batch \
+    -in controller.csr -days 365 -out controller_cert.pem
+cat controller_cert.pem controller_key.pem > controller_cert_bundle.pem
+
+
+
+juju config octavia \
+    lb-mgmt-issuing-cacert="$(base64 issuing_ca.pem)" \
+    lb-mgmt-issuing-ca-private-key="$(base64 issuing_ca_key.pem)" \
+    lb-mgmt-issuing-ca-key-passphrase=foobar \
+    lb-mgmt-controller-cacert="$(base64 controller_ca.pem)" \
+    lb-mgmt-controller-cert="$(base64 controller_cert_bundle.pem)"
+
+
+
+
+    juju run octavia-diskimage-retrofit/leader retrofit-image
+    juju run octavia/0 configure-resources  
+
+
+  juju deploy octavia --constraints tags=octavia --channel 2023.2/stable 
+  juju relate  octavia-mysql-router:db-router mysql-innodb-cluster:db-router
+juju relate octavia-mysql-router:shared-db octavia:shared-db
+  juju relate octavia:amqp rabbitmq-server:amqp
+  juju relate octavia:identity-service keystone:identity-service
+  juju relate octavia:certificates vault:certificates
+  juju relate ovn-chassis-octavia:ovsdb-subordinate  octavia:ovsdb-subordinate
+ 
+  juju relate ovn-chassis-octavia:ovsdb ovn-central:ovsdb
+  juju relate ovn-central:ovsdb-cms  octavia:ovsdb-cms
+  juju relate neutron-api:neutron-load-balancer octavia:neutron-api
+  juju relate octavia-dashboard:dashboard  openstack-dashboard:dashboard-plugin
+ 
+
+  juju relate  octavia:amqp  rabbitmq-server:amqp
+
+
+
+  - - neutron-api:neutron-load-balancer
+  - octavia:neutron-api
+
+
+
+
+    juju remove-relation  octavia:amqp  rabbitmq-server:amqp --force 
+      juju remove-relation  octavia:identity-service keystone:identity-service
+juju  remove-relation  octavia:certificates vault:certificates
+
+
+juju  remove-relation  ovn-central:ovsdb-cms  octavia:ovsdb-cms
+
+
+
+ juju relate ovn-chassis:ovsdb-subordinate  octavia:ovsdb-subordinate
+   juju relate neutron-api:neutron-load-balancer octavia:neutron-api

@@ -1,0 +1,27 @@
+  juju set-model-constraints zones=zone-os2
+
+
+
+
+  cat <<EOF > gss.yaml
+
+sudo nano gss.yaml
+glance-simplestreams-sync:
+  mirror_list: |
+    [{ url: 'http://cloud-images.ubuntu.com/releases/',
+       name_prefix: 'ubuntu:released',
+       path: 'streams/v1/index.sjson',
+       max: 1,
+       item_filters: ['arch~(arm64|amd64)', 'ftype~(uefi1.img|uefi.img|disk1.img)', 'release~(noble|jammy)']
+     },
+     { url: 'http://cloud-images.ubuntu.com/daily/',
+       name_prefix: 'ubuntu:daily',
+       path: 'streams/v1/index.sjson',
+       max: 1,
+       item_filters: ['arch~(arm64|amd64)', 'ftype~(uefi1.img|uefi.img|disk1.img)', 'release~(noble|jammy)']
+     }
+    ]
+
+
+
+EOF

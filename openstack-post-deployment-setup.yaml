@@ -1,0 +1,136 @@
+
+
+
+sudo snap install openstackclients
+wget https://docs.openstack.org/project-deploy-guide/charm-deployment-guide/latest/_downloads/c894c4911b9572f0b5f86bdfc5d12d8e/openrc
+
+source ~/openrc
+env | grep OS_
+
+env | grep OS_
+OS_REGION_NAME=RegionOne
+OS_AUTH_VERSION=3
+OS_CACERT=/home/ze/snap/openstackclients/common/root-ca.crt
+OS_AUTH_URL=https://12.12.196.225:5000/v3
+OS_PROJECT_DOMAIN_NAME=admin_domain
+OS_AUTH_PROTOCOL=https
+OS_USERNAME=admin
+OS_AUTH_TYPE=password
+OS_USER_DOMAIN_NAME=admin_domain
+OS_PROJECT_NAME=admin
+OS_PASSWORD=heiPhaikahghoh4I
+OS_IDENTITY_API_VERSION=3
+
+
+openstack network create --external --share \
+   --provider-network-type flat --provider-physical-network physnet1 \
+   ext_net
+
+
+ 
+openstack subnet create --network ext_net --no-dhcp \
+   --gateway 12.12.0.1 --subnet-range 12.12.0.0/16 \
+   --allocation-pool start=12.12.123.1,end=12.12.123.254 \
+   ext_subnet
+
+openstack subnet create --network ext_net --no-dhcp \
+   --gateway 12.12.0.1 --subnet-range 12.12.0.0/16 \
+   --allocation-pool start=12.12.190.1,end=12.12.191.254 \
+   ext_subnet
+
+
+ 
+openstack network create --internal int_net
+
+openstack subnet create --network int_net --dns-nameserver 8.8.8.8 \
+   --subnet-range 192.168.0/24 \
+   --allocation-pool start=192.168.0.10,end=192.168.0.99 \
+   int_subnet
+
+
+
+openstack router create router1
+
+openstack router add subnet router1  int_subnet
+openstack router set router1 --external-gateway ext_net
+
+
+mkdir ~/cloud-keys
+
+ssh-keygen -q -N '' -f ~/cloud-keys/adminkey
+
+openstack keypair create --public-key ~/cloud-keys/adminkey.pub adminkey
+ 
+ 
+
+
+openstack security group create --description 'Allow SSH' Allow_SSH
+openstack security group rule create --proto tcp --dst-port 22 Allow_SSH
+openstack security group rule create --proto icmp  Allow_SSH
+
+for i in $(openstack security group list | awk '/default/{ print $2 }'); do
+   openstack security group rule create $i --protocol tcp --remote-ip 0.0.0.0/0 --dst-port 22;
+done
+
+mkdir ~/cloud-images
+
+wget http://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img \
+   -O ~/cloud-images/jammy-amd64.img
+
+wget http://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img    \
+   -O ~/cloud-images/noble-amd64.img
+ 
+
+openstack image create --public --container-format bare \
+   --disk-format qcow2 --file ~/cloud-images/jammy-amd64.img \
+   jammy-amd64
+
+openstack image create --public --container-format bare \
+   --disk-format qcow2 --file ~/cloud-images/noble-amd64.img \
+   noble-amd64
+
+
+openstack flavor create --ram 2048 --disk 20 --ephemeral 20 m1.small
+
+
+openstack server create --image jammy-amd64 --flavor m1.small \
+   --key-name adminkey --network int_net --security-group Allow_SSH \
+   jammy-1
+   
+openstack server list
+
+FLOATING_IP=$(openstack floating ip create -f value -c floating_ip_address ext_net)
+openstack server add floating ip jammy-1 $FLOATING_IP
+ 
+
+FLOATING_IP=$(openstack floating ip create -f value -c floating_ip_address ext_net)
+openstack server add floating ip jammy-1 $FLOATING_IP
+
+ssh -i ~/cloud-keys/adminkey.pub   ubuntu@$FLOATING_IP
+
+
+chmod 600 /home/ze/cloud-keys/adminkey
+
+
+openstack security group create --description 'Allow SSH' Allow_SSH
+openstack security group rule create --proto tcp --dst-port 22 Allow_SSH
+openstack security group rule create --proto icmp  Allow_SSH
+
+for i in $(openstack security group list | awk '/default/{ print $2 }'); do
+   openstack security group rule create $i --protocol tcp --remote-ip 0.0.0.0/0 --dst-port 22;
+done
+
+
+
+
+FLOATING_IP=$(openstack floating ip create -f value -c floating_ip_address ext_net)
+openstack server add floating ip inst3 $FLOATING_IP
+
+
+
+openstack server create --image jammy-amd64 --flavor m1.small \
+   --key-name adminkey --network int_net --security-group Allow_SSH \
+   jammy-4
+
+FLOATING_IP=$(openstack floating ip create -f value -c floating_ip_address ext_net)
+openstack server add floating ip jammy-4 $FLOATING_IP

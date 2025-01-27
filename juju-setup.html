@@ -1,0 +1,40 @@
+cat <<EOF > jujusetup.yaml
+    clouds:
+      maas-one:
+        type: maas
+        auth-types: [oauth1]
+        endpoint: http://12.12.0.3:5240/MAAS
+    
+    credentials:
+      maas-one:
+        anyuser:
+          auth-type: oauth1
+          maas-oauth: dqQmbwzuF2z9e6Xtjm:4qUccJBqWmTNhkzAWP:np4Cfy8KfUvBq7SaW8gaVSNrKNmbwyRz
+EOF
+
+
+    sudo snap install juju --classic 
+    juju add-cloud --client -f jujusetup.yaml maas-one
+    juju add-credential --client -f jujusetup.yaml maas-one
+    juju bootstrap --bootstrap-series=noble --constraints tags=juju maas-one maas-controller
+     
+    juju add-model --config default-series=jammy openstack
+    juju switch maas-controller:openstack
+    
+
+
+
+cat <<EOF > os-cred.yaml
+      credentials:
+        os:
+          admin:
+            auth-type: access-key
+            maas-oauth: dqQmbwzuF2z9e6Xtjm:4qUccJBqWmTNhkzAWP:np4Cfy8KfUvBq7SaW8gaVSNrKNmbwyRz
+  EOF
+
+
+
+    6a71373393004f3caf58039477810b8c
+    asf
+
+    zcnzMq4RfzfUeP62t6ZUOP-xhXF4l-lzA9Z3pHAxSs9DiPYhkoAFtK-cCKEGupWzKIQD6bKfPkUuOYdE55q4bA

@@ -1,0 +1,39 @@
+clouds:
+  my-openstack:
+    type: openstack
+    auth-types: [userpass]
+    endpoint: https://12.12.197.55:5000/v3
+    regions:
+      RegionOne:
+        endpoint: https://12.12.197.55:5000/v3
+
+
+ credentials:
+  openstack2:
+    default-credentials-name:
+      auth-type: userpass
+      username: admin
+      password: bieFoduw7theephu
+      project-name: admin
+      user-domain-name: admin_domain
+      project-domain-name: admin_domain
+
+
+juju add-credential openstack2 --client -f oscred.yaml
+
+
+juju bootstrap openstack2 os2-controller --dry-run
+
+
+      OS_REGION_NAME=RegionOne
+OS_AUTH_VERSION=3
+OS_CACERT=/home/ze/snap/openstackclients/common/root-ca.crt
+OS_AUTH_URL=https://12.12.197.55:5000/v3
+OS_PROJECT_DOMAIN_NAME=admin_domain
+OS_AUTH_PROTOCOL=https
+OS_USERNAME=admin
+OS_AUTH_TYPE=password
+OS_USER_DOMAIN_NAME=admin_domain
+OS_PROJECT_NAME=admin
+OS_PASSWORD=bieFoduw7theephu
+OS_IDENTITY_API_VERSION=3

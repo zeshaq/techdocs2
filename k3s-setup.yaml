@@ -1,0 +1,218 @@
+ miTTuq2oJGYrsldF
+mzn5Tn48EAuT0dmRnzje
+
+
+
+
+curl -sfL https://get.k3s.io | sh -
+
+
+mkdir -p $HOME/.kube
+sudo cp /etc/rancher/k3s/k3s.yaml $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+export KUBECONFIG=$HOME/.kube/config
+sudo chmod 644 /etc/rancher/k3s/k3s.yaml
+
+ echo 'export KUBECONFIG=$HOME/.kube/config' >> ~/.bashrc
+source ~/.bashrc
+
+
+
+
+
+
+
+
+
+
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.16.3/cert-manager.crds.yaml
+kubectl create namespace cert-manager
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.16.3
+kubectl get pods --namespace cert-manager
+
+
+
+
+
+---------------
+
+nano letsencrypt-clusterissuer.yaml
+
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    email: zeshaq@gmail.com  # Replace with your email address
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-prod-key
+    solvers:
+      - http01:
+          ingress:
+            class: traefik
+kubectl apply -f letsencrypt-clusterissuer.yaml
+
+-------------------------------------
+
+
+html-configmap.yaml
+
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: landing-page-html
+  namespace: default
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Welcome to Zeteq</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f4f4f4;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+        }
+        .container {
+          text-align: center;
+          background-color: #fff;
+          padding: 30px;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+          color: #333;
+        }
+        p {
+          color: #777;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>Welcome to Zeteq!</h1>
+        <p>Your one-stop solution for modern web services.</p>
+      </div>
+    </body>
+    </html>
+
+
+kubectl apply -f html-configmap.yaml
+
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: landing-page
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: landing-page
+  template:
+    metadata:
+      labels:
+        app: landing-page
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        volumeMounts:
+        - name: landing-page-html
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: landing-page-html
+        configMap:
+          name: landing-page-html
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: landing-page
+  namespace: default
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: landing-page
+
+
+kubectl apply -f landing-page-deployment.yaml
+
+
+-------------------
+
+
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: landing-page-ingress
+  namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+spec:
+  rules:
+  - host: zeteq.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: landing-page
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - zeteq.com
+    secretName: zeteq-com-tls
+
+
+kubectl apply -f landing-page-ingress.yaml
+
+
+
+
+-------------------
+
+helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
+helm repo update
+kubectl create namespace cattle-system
+
+
+helm install rancher rancher-latest/rancher \
+  --namespace cattle-system \
+  --set hostname=rancher.zeteq.com \
+  --set ingress.tls.source=letsEncrypt \
+  --set certManager.clusterIssuerName=letsencrypt-production \
+  --set replicas=2
+
+
+
+kubectl get pods -n cattle-system
+
+yGM63e5O2L3MhZ5b
+
+
+
+---------------------------
+
+
+curl -sfL https://get.k3s.io | K3S_URL=https://103.108.62.220:6443 K3S_TOKEN=K10905f734937b869c9593a230895fc67b35f5a0c8758d75c84b2e26332ac47ffe7::server:0428cea82e4607310fcba28053f59bf6 sh -
