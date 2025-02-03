@@ -1,0 +1,70 @@
+kubectl create secret docker-registry harbor-cred \
+  --docker-server=harbor.zeteq.com \
+  --docker-username=admin \
+  --docker-password=your_password \
+  --docker-email=zeshaq@gmail.com \
+  --namespace=default
+
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myweb
+  namespace: myweb
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myweb
+  template:
+    metadata:
+      labels:
+        app: myweb
+    spec:
+      containers:
+      - name: myweb
+        image: harbor.zeteq.com/web-apps/myweb:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myweb
+  namespace: myweb
+spec:
+  selector:
+    app: myweb
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myweb-ingress
+  namespace: myweb
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: myweb.zeteq.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: myweb
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - myweb.zeteq.com
+    secretName: myweb-tls

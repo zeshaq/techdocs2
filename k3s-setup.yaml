@@ -2,6 +2,8 @@
 mzn5Tn48EAuT0dmRnzje
 
 
+rancher.zeteq.com hEm8GnpdifPAPD_Jipbi
+
 
 
 curl -sfL https://get.k3s.io | sh -
@@ -215,4 +217,20 @@ yGM63e5O2L3MhZ5b
 ---------------------------
 
 
-curl -sfL https://get.k3s.io | K3S_URL=https://103.108.62.220:6443 K3S_TOKEN=K10905f734937b869c9593a230895fc67b35f5a0c8758d75c84b2e26332ac47ffe7::server:0428cea82e4607310fcba28053f59bf6 sh -
+ install harbor 
+
+ kubectl create namespace harbor
+ helm repo add harbor https://helm.goharbor.io
+helm repo update
+
+
+helm install harbor harbor/harbor \
+  --namespace harbor \
+  --set expose.type=ingress \
+  --set expose.ingress.hosts.core=harbor.zeteq.com \
+  --set expose.ingress.hosts.notary=notary.zeteq.com \
+  --set expose.ingress.hosts.chartmuseum=chartmuseum.zeteq.com \
+  --set expose.ingress.annotations."cert-manager\.io/cluster-issuer"="letsencrypt-prod" \
+  --set externalURL=https://harbor.zeteq.com \
+  --set harborAdminPassword=your_password
+----------------------

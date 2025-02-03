@@ -1,0 +1,33 @@
+sudo apt update
+sudo apt install build-essential linux-headers-$(uname -r)
+
+
+git clone https://github.com/mkubecek/vmware-host-modules.git
+cd vmware-host-modules
+git checkout workstation-17.5.1  # Adjust version if needed
+
+
+make
+sudo make install
+
+
+sudo modprobe -a vmmon vmnet
+sudo vmware-modconfig --console --install-all
+sudo apt install linux-image-$(uname -r)-dbg
+sudo dpkg --list | grep linux-image
+sudo grub-set-default "Advanced options for Ubuntu>Ubuntu, with Linux <your-kernel-version>"
+sudo update-grub
+
+
+
+
+
+sudo add-apt-repository ppa:oibaf/graphics-drivers
+sudo apt update
+sudo apt upgrade
+
+
+Hkj38djf&*3dD83
+
+
+

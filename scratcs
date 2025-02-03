@@ -1,0 +1,17 @@
+docker run --name nginx-container -d \
+  -v /home/ze/nginx.conf:/etc/nginx/nginx.conf:ro \
+  -p 80:80 \
+  nginx
+
+
+
+  docker run -d \
+  --hostname gitlab.zeteq.com \
+  -p 80:80 \
+  -p 1443:1443 \
+  -p 2121:2121 \
+  --name gitlab \
+  -v gitlab_config:/etc/gitlab \
+  -v gitlab_logs:/var/log/gitlab \
+  -v gitlab_data:/var/opt/gitlab \
+  gitlab/gitlab-ce:latest

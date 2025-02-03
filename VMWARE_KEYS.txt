@@ -1,0 +1,190 @@
+VMware vCenter 7.0 Standard
+104HH-D4343-07879-MV08K-2D2H2
+410NA-DW28H-H74K1-ZK882-948L4
+406DK-FWHEH-075K8-XAC06-0JH08
+
+VMware vSphere ESXi 7.0 Enterprise Plus
+JJ2WR-25L9P-H71A8-6J20P-C0K3F
+HN2X0-0DH5M-M78Q1-780HH-CN214
+JH09A-2YL84-M7EC8-FL0K2-3N2J2
+
+VMware vSphere 7 Enterprise Plus with Add-on for Kubernetes
+J1608-4GJEQ-071L8-9VA0H-2MUK6
+M10DH-8YL47-474L1-DV3U0-8H054
+MM4MR-2G005-H7039-JVCAP-2RAL8
+
+NSX-T
+UC3RA-D3XD4-H817Z-UEMNG-WC0WF - NSX for vSphere - Enterprise
+4J6VQ-DTHEQ-58TX9-00AU6-3T952 - NSX for vSheild
+
+
+VMware vSphere 6 Ent
+4F2DG-44K11-VZP61-9L3N0-03K0E
+0A679-40081-GZ880-J2A74-82057
+
+NSX DataCenter EnterPrise Plus:
+AC79A-DDG4K-48EWZ-DEZ7X-X6HFF
+NSX Data Center Distributed Threat Prevention:
+YA5TK-6WY85-M88GP-66MZC-MG8W0
+
+VMware vSphere 7 Enterprise Plus with Add-on for Kubernetes
+
+J1608-4GJEQ-071L8-9VA0H-2MUK6
+M10DH-8YL47-474L1-DV3U0-8H054
+MM4MR-2G005-H7039-JVCAP-2RAL8
+
+VMware VSAN 7.0 Enterprise Plus
+HN0D8-AAJ1Q-07D00-6U924-CX224
+50008-221DH-M7E99-A9CKM-A1030
+HN0NH-62051-H75E9-P38RM-0H870
+
+VMware NSX Data Center Enterprise Plus VM based keys
+GC7N2-2NZDM-H88NY-GWQ7G-YF0E0
+AA1NK-2LG0L-48DQY-G5XNX-P6KVA
+CU3M2-8LZ47-485GZ-XQM7G-NY8G2
+
+VMware NSX Data Center Enterprise Plus CORE based keys
+CA518-ALY17-4849Z-YYYET-YFRCD
+YF1JA-41Y9N-480MP-1GQ5G-MF8VD
+UZ308-FUF8H-0815P-NGYQZ-N6RUF
+
+VMware NSX Data Center Enterprise Plus CPU based keys
+AC79A-DDG4K-48EWZ-DEZ7X-X6HFF
+ZG3J2-FAY90-484RQ-M7MGG-WKHG8
+FU11R-4DW8Q-48DLZ-UYMEG-XKAXF
+
+VMware NSX Data Center Distributed Threat Prevention
+YA5TK-6WY85-M88GP-66MZC-MG8W0
+YZ7HU-69W1K-089UY-1GWNZ-YYAVD
+FV3E0-2WF1N-488NP-XFXN9-ZU0R2
+
+VMWare Site Recovery Manager 8.4 Enterprise
+0U45K-D9295-489Y9-XR3QM-AQ8M2
+
+NSX Firewall with Advanced Threat Prevention:
+NC69K-4L040-M81T0-W98ZK-AFA40
+
+NSX Data Center Distributed Threat Prevention:
+FV3E0-2WF1N-488NP-XFXN9-ZU0R2
+
+NSX Advanced Threat Prevention:
+HG40K-0Y1E0-M80D0-0J9ZM-8UH6
+
+VMware vCenter 7.0 Standard
+104HH-D4343-07879-MV08K-2D2H2
+410NA-DW28H-H74K1-ZK882-948L4
+406DK-FWHEH-075K8-XAC06-0JH08
+
+VMware vSphere ESXi 7.0 Enterprise Plus
+JJ2WR-25L9P-H71A8-6J20P-C0K3F
+HN2X0-0DH5M-M78Q1-780HH-CN214
+JH09A-2YL84-M7EC8-FL0K2-3N2J2
+
+VMware vSphere 7 Enterprise Plus with Add-on for Kubernetes
+J1608-4GJEQ-071L8-9VA0H-2MUK6
+M10DH-8YL47-474L1-DV3U0-8H054
+MM4MR-2G005-H7039-JVCAP-2RAL8
+
+
+
+https://gist.github.com/hegdepavankumar/e1c4c2d58d8698f69792d664d39bc402
+
+-------------------------------------------------------------------
+
+
+VMware Workstation Pro 17 full license keys. Collected and sorted out thousands of universal License Keys for all major versions of VMware Workstation Pro 17. x versions.
+
+Install VMWare Workstation PRO 17.x (Read it right. PRO!)
+---
+
+
+- This gist can get off at any time.📍
+- If you have a problem comment and people will try to help you!
+- No virus ⚠🛡
+- No spam just license key 🔐🔑
+- Feel free to use and share with corporate Friends and Teams as well......
+- Even these keys are works below 17 or any further versions ....🎊✨
+- 🌟 Hey there! Mind sprinkling some stars on my repo? It's like giving it a digital high-five! 🚀
+- If you've found our work helpful, I would greatly appreciate it if you could take a moment to give a star ⭐. Your feedback is valuable and helps us improve. Thank you!
+
+
+
+
+ ## Recently added Keys...
+
+--------------------------------------------------------------------
+
+MC60H-DWHD5-H80U9-6V85M-8280D
+4A4RR-813DK-M81A9-4U35H-06KND
+NZ4RR-FTK5H-H81C1-Q30QH-1V2LA
+JU090-6039P-08409-8J0QH-2YR7F
+4Y09U-AJK97-089Z0-A3054-83KLA
+4C21U-2KK9Q-M8130-4V2QH-CF810
+HY45K-8KK96-MJ8E0-0UCQ4-0UH72
+JC0D8-F93E4-HJ9Q9-088N6-96A7F
+NG0RK-2DK9L-HJDF8-1LAXP-1ARQ0
+0U2J0-2E19P-HJEX1-132Q2-8AKK6
+
+
+-----------------------------------------------
+
+## Note
+
+Use only if you are a personal user. I'm NOT responsible for what you do with it. <br>
+Enjoy your VMs!
+
+
+## Download VMware Workstation Pro
+--------------------------------------
+
+
+Download VMware Workstation Latest Version for Home Users or Professionals:
+
+VMware Workstation is a virtualization program developed by VMware and allows you to run multiple virtual machines on your physical computer. With VMware Workstation you can set up and use a Windows, Linux, or even MacOS operating system. Although VMware Workstation is a paid program, it is one step ahead of its competitors. If you are a home user, you can download VMware WPlayer for free or Workstation Pro.
+
+🚀 Ready to elevate your experience? Dive into the extraordinary with free, fully functional software! No strings attached, no registration required—just one click away from a world of possibilities. ✨ Start your journey now by experiencing the magic firsthand. Direct download awaits you! --- 🌟✨[Start Your Free Adventure Here👇
+
+
+
+Copy and paste the url on browser it will download automatically!!
+----------------------------------------------------------------------
+
+1. Workstation 17 Pro for Windows : https://www.vmware.com/go/getworkstation-win 
+2. Workstation 17 Pro for Linux :  https://www.vmware.com/go/getworkstation-linux
+3. VMware Fusion 13 Pro for MacOS :  https://www.vmware.com/go/getfusion
+
+
+
+### Need Help
+-----------------------------
+we are always happy to help you...
+
+Join Community: https://t.me/resourcehub1
+
+
+Feel free to contact me if you have any questions or suggestions.📲
+
+
+Show some ❤️ by starring some of the repositories! 🙏
+
+==================================================================================
+
+
+also, I added more keys and MORE Free KEYS: 
+----------------------------------------------
+
+
+4U612-DN31H-MJEJ0-0V0Z4-978HD
+5G44H-ACH50-0J4C9-1VC5P-CY0QD
+JC000-8G047-MJDF1-0H3E6-8QR5F
+JV2NU-0XL5N-0J4Q8-0T0E6-8GH56
+JZ6E0-4R1E0-HJ1Q0-1R8NH-3AK28
+0Z48K-4X29Q-MJE80-113GK-C7K3A
+HF4H0-46K80-MJ8D9-1KAZP-CKK12
+NY69H-2N05P-HJ170-1V1ZM-CG222
+4C45A-D8J0H-HJ5T0-1T25H-92A76
+0Z4H2-0WK9K-4JE10-0T9G6-9C8M4
+5F0TK-A5J05-MJDU9-103ZP-2GUL0
+HY0W0-8NK11-HJ4D8-02AE2-1GH54
+JV4RK-4Y29N-MJ5F8-12CXP-8L836
+5F4RU-D5351-4J8V1-0U2X2-06078
