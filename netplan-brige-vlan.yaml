@@ -1,0 +1,36 @@
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens15f0:
+      dhcp4: false
+      addresses: [12.12.0.3/16]
+      nameservers:
+        addresses:
+        - 8.8.8.8
+      routes:
+      - metric: 100
+        on-link: true
+        to: "default"
+        via: "12.12.0.1"
+
+    ens15f1:
+      dhcp4: false
+  bridges:
+    br12:
+      addresses:
+      - "12.12.10.2/24"
+      interfaces: [vlan10]
+    br12-20:
+      addresses:
+      - "12.12.20.2/24"
+      interfaces: [vlan20]
+
+  vlans:
+    vlan10:
+      id: 10
+      link: ens15f0
+    vlan20:
+      id: 20
+      link: ens15f0
+
