@@ -17,7 +17,7 @@ network:
     ens15f1:
       dhcp4: false
   bridges:
-    br12:
+    br12-10:
       addresses:
       - "12.12.10.2/24"
       interfaces: [vlan10]
@@ -33,4 +33,3 @@ network:
     vlan20:
       id: 20
       link: ens15f0
-
