@@ -28,14 +28,11 @@ openstack network create --external --share \
 
 
  
-openstack subnet create --network ext_net --no-dhcp \
-   --gateway 12.12.0.1 --subnet-range 12.12.0.0/16 \
-   --allocation-pool start=12.12.123.1,end=12.12.123.254 \
-   ext_subnet
+
 
 openstack subnet create --network ext_net --no-dhcp \
-   --gateway 12.12.0.1 --subnet-range 12.12.0.0/16 \
-   --allocation-pool start=12.12.190.1,end=12.12.191.254 \
+   --gateway 14.14.0.1 --subnet-range 14.14.0.0/16 \
+   --allocation-pool start=14.14.190.1,end=14.14.191.254 \
    ext_subnet
 
 
